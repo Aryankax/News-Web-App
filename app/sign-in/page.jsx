@@ -39,7 +39,6 @@ const SignIn = () => {
   };
 
   const handleSignUp = () => {
-    // Implement your sign-up logic or redirect to the sign-up page
     router.push('/signup');
   };
 

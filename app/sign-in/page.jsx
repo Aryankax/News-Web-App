@@ -39,14 +39,16 @@ const SignIn = () => {
   };
 
   const handleSignUp = () => {
-    router.push('/signup');
+    router.push('/sign-up');
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-950 via-indigo-800 to-blue-400 text-white">
-      <div className="max-w-md w-full p-6 bg-gray-800 rounded-md shadow-md">
-        <h2 className="text-2xl font-semibold text-white mb-6">Sign In</h2>
-        <form onSubmit={handleSignIn}>
+      <div className="max-w-md w-full p-6 bg-gray-800 rounded-md shadow-md transition-transform hover:scale-105">
+        <h2 className="text-2xl font-semibold text-white mb-6 animate__animated animate__fadeIn animate__delay-1s">
+          Sign In
+        </h2>
+        <form onSubmit={handleSignIn} className="animate__animated animate__fadeIn animate__delay-2s">
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -57,7 +59,7 @@ const SignIn = () => {
             <input
               type="email"
               id="email"
-              className="mt-1 p-2 w-full text-gray-800 bg-gray-300 rounded-md"
+              className="mt-1 p-2 w-full text-gray-800 bg-gray-300 rounded-md transition-all duration-300 focus:outline-none focus:shadow-outline-blue"
               onChange={handleEmailChange}
               value={email}
               required
@@ -73,7 +75,7 @@ const SignIn = () => {
             <input
               type="password"
               id="password"
-              className="mt-1 p-2 w-full text-gray-800 bg-gray-300 rounded-md"
+              className="mt-1 p-2 w-full text-gray-800 bg-gray-300 rounded-md transition-all duration-300 focus:outline-none focus:shadow-outline-blue"
               onChange={handlePasswordChange}
               value={password}
               required
@@ -82,16 +84,14 @@ const SignIn = () => {
           <div className="flex justify-between mb-4">
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue transition duration-300 transform hover:scale-105"
             >
               Sign In
             </button>
             <button
               type="button"
-              onClick={()=> {
-                router.push('/sign-up')
-              }}
-              className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green"
+              onClick={handleSignUp}
+              className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green transition duration-300 transform hover:scale-105"
             >
               Sign Up
             </button>

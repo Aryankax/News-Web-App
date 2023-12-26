@@ -16,6 +16,7 @@ const NewsReader = () => {
   const [description, setDescription] = useState([]);
   const [favoritesNew, setFavoritesNew] = useState([]);
   const [descriptionNew, setDescriptionNew] = useState([]);
+  const [expandedNews, setExpandedNews] = useState({});
 
   const router = useRouter();
 
@@ -117,7 +118,6 @@ const NewsReader = () => {
         Logout
         </button>
       </div>
-      <h1 className="text-5xl font-bold mb-2 text-white animate-pulse">Hello {user.email}</h1>
       <h1 className="text-5xl font-bold mb-2 text-white animate-pulse">Welcome to "News Read" 📰📖</h1>
       <p className="text-gray-400 mb-8 translate-x-5 text-xl">
         Your source for the latest and trending news articles.

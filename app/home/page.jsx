@@ -21,7 +21,7 @@ const NewsReader = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          'https://newsapi.org/v2/top-headlines?country=us&apiKey=ff5e984f28eb40b39f29dde71b64e34f'
+          `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
         );
         setNews(response.data.articles);
       } catch (error) {
@@ -106,7 +106,7 @@ const NewsReader = () => {
               onClick={() => addToFavorites(article)}
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline-blue"
             >
-              Add to Favourites
+              Add to Favourites ❤️
             </button>
           </div>
         ))}

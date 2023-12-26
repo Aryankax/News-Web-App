@@ -1,5 +1,5 @@
 # News Web App
-This News Reader Website is made using Next Js, Node Js, Tailwind CSS and Firbase. It contains Authentication and Sign Up Functionality and displays the latest news fetched from `https://newsapi.org/` It also let's you add your favourite news and stores it so that you can read it the next time you login.
+This News Reader Website is made using Next Js, Node Js, Tailwind CSS and Firbase. It contains Authentication and Sign Up Functionality and displays the latest news fetched from `https://newsapi.org/` It also let's you add your favourite news and stores it so that you can read it the next time you login. You can get your News API key for free from `https://newsapi.org/`
 
 ## This has been deployed on Vercel but the News API only allows to fetch information from it on the local machine and hence that is why it is not fetching News articles on the Vercel deployed link. 
 `https://news-web-app-six.vercel.app`
@@ -26,10 +26,21 @@ Make sure you have the following packages installed:
 3. Instal the required dependencies:
 `npm install`
 
-4. Run the website using:
+4. Now you have to set up the environment variables:
+make a `.env.local` file inside your main folder (News-Web-App) and add the following env variables to run the website
+- `NEXT_PUBLIC_FIREBASE_API_KEY = Your Firebase API Key goes Here`
+- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN = Your Firebase auth domain goes here`
+- `NEXT_PUBLIC_FIREBASE_PROJECT_ID = Firebase Project ID goes here`
+- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET =  Firebase storage bucket goes here`
+- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = Firebase Messaging Sender ID goes here`
+- `NEXT_PUBLIC_FIREBASE_API_ID = Firebase API ID goes here`
+- `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = Firebase Measurement ID goes here`
+- `NEXT_PUBLIC_NEWS_API_KEY = Your News API Key goes here`
+
+5. Run the website using:
 `npm run dev`
 
-5. Keep your port 3000 free as it will run on that:
+6. Keep your port 3000 free as it will run on that:
 `localhost:3000`
 
 The website should be now up and running locally.

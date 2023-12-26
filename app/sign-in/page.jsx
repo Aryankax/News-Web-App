@@ -4,12 +4,16 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
 import { useRouter } from 'next/navigation';
 
+import { setPersistence, browserSessionPersistence, getAuth } from 'firebase/auth';
+
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
+
+  const auth1 = getAuth();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -38,9 +42,21 @@ const SignIn = () => {
     }
   };
 
+  const persistSession = async () => {
+    try {
+      await setPersistence(auth1, browserSessionPersistence);
+    } catch (error) {
+      console.error('Error setting session persistence:', error);
+    }
+  };
+
+  persistSession();
+
   const handleSignUp = () => {
     router.push('/sign-up');
   };
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-950 via-indigo-800 to-blue-400 text-white">

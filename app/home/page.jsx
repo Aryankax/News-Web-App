@@ -2,9 +2,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, deleteDoc, doc, query, where} from 'firebase/firestore';
 
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, signOut, setPersistence, browserSessionPersistence} from 'firebase/auth';
 
 import { useRouter } from 'next/navigation';
 
@@ -14,8 +14,17 @@ const NewsReader = () => {
   const [news, setNews] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [description, setDescription] = useState([]);
+  const [favoritesNew, setFavoritesNew] = useState([]);
+  const [descriptionNew, setDescriptionNew] = useState([]);
 
   const router = useRouter();
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if(user){
+  const userEmail = user.email;
+  console.log(userEmail)
+  }
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -31,9 +40,12 @@ const NewsReader = () => {
 
     const getFavs = async () => {
       try {
-        const getFavDocs = await getDocs(collection(db, 'favs'));
+        const newsRef = collection(db, "favs");
+        const q = query(newsRef, where("email", "==", user.email))
+        const getFavDocs = await getDocs(q);
         const favTitles = getFavDocs.docs.map((doc) => doc.data().title);
         const favDescription = getFavDocs.docs.map((doc) => doc.data().description);
+        console.log(q);
         setFavorites(favTitles);
         setDescription(favDescription);
       } catch (error) {
@@ -41,18 +53,30 @@ const NewsReader = () => {
       }
     };
 
+
     fetchNews();
     getFavs();
   }, []);
 
   const addToFavorites = async (articles) => {
     try {
+        const newsRef = collection(db, "favs");
+        const q = query(newsRef, where("email", "==", user.email))
+        const getFavDocs = await getDocs(q);
+        const favTitles = getFavDocs.docs.map((doc) => doc.data().title);
+        const favDescription = getFavDocs.docs.map((doc) => doc.data().description);
+        setFavoritesNew(favTitles);
+        setDescriptionNew(favDescription);
+        if(!favoritesNew.includes(articles.title)){
       const docRef = await addDoc(collection(db, 'favs'), {
         title: articles.title,
         description: articles.description,
+        email: user.email
       });
       console.log('Document written with ID: ', docRef.id);
-      getFavs();
+    } else {
+        console.log("Document is already in favourites");
+    }
     } catch (e) {
       console.error('Error adding document to the DB: ', e);
     }
@@ -61,18 +85,18 @@ const NewsReader = () => {
   const removeFromFavorites = async (title) => {
     try {
       const favDocs = await getDocs(collection(db, 'favs'));
-      const docToDelete = favDocs.docs.find((doc)=> doc.data().title === title);
-      if(docToDelete){
-        await deleteDoc(doc(db, "title", docToDelete.id))
+      const docToDelete = favDocs.docs.find((doc) => doc.data().title === title);
+      if (docToDelete) {
+        await deleteDoc(doc(db, "favs", docToDelete.id));
       }
-      
     } catch (error) {
       console.error('Error removing document from favorites:', error);
     }
   };
+  
 
-  const refreshPage = () => {
-    window.location.reload();
+  const refreshPage = async() => {
+     router.push('/sign-in');
   };
 
   const handleLogout = async () => {
@@ -93,6 +117,7 @@ const NewsReader = () => {
         Logout
         </button>
       </div>
+      <h1 className="text-5xl font-bold mb-2 text-white animate-pulse">Hello {user.email}</h1>
       <h1 className="text-5xl font-bold mb-2 text-white animate-pulse">Welcome to "News Read" 📰📖</h1>
       <p className="text-gray-400 mb-8 translate-x-5 text-xl">
         Your source for the latest and trending news articles.
@@ -119,6 +144,7 @@ const NewsReader = () => {
         >
           Refresh
         </button>
+        <p className="text-gray-400 mb-8 text-lg">On clicking refesh you will return to the login page to restart the login session again (click the button if you want to see the newly added news to favorites)</p>
         {favorites.map((title, index) => (
           <div key={title} className="bg-gray-700 p-6 rounded-lg mb-4 transform transition-transform hover:scale-101 transition-color hover:bg-gray-600">
             <div className="flex justify-between items-center mb-4">

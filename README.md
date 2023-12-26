@@ -35,16 +35,16 @@ Make sure you have the following packages installed:
 The website should be now up and running locally.
 
 # Screenshots of the website
-1. Welcome page (First page)
+- Welcome page (First page)
 <img width="960" alt="image" src="https://github.com/Aryankax/News-Web-App/assets/113718466/3d54d499-c531-4483-8a3e-25933575ae3e">
-2. Sign Up Page
+- Sign Up Page
 <img width="960" alt="image" src="https://github.com/Aryankax/News-Web-App/assets/113718466/56a6185e-6333-4207-a79d-d5fdcea09cf6">
-3. Sign In Page
+- Sign In Page
 <img width="960" alt="image" src="https://github.com/Aryankax/News-Web-App/assets/113718466/ea7ce68d-87ba-43e4-8cfe-8974b293616a">
-4. Main Home Page
+- Main Home Page
 <img width="942" alt="image" src="https://github.com/Aryankax/News-Web-App/assets/113718466/c9e89996-4b26-4de4-b863-22e2f77978f9">
 <img width="941" alt="image" src="https://github.com/Aryankax/News-Web-App/assets/113718466/2fe842b0-29d9-41de-bd09-03b011ff66a6">
-5. Favourites
+- Favourites
 <img width="941" alt="image" src="https://github.com/Aryankax/News-Web-App/assets/113718466/ad699717-9739-4067-abb2-ce495c2a61a8">
 
 
